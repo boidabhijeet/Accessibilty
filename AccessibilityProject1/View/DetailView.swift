@@ -13,7 +13,7 @@ struct DetailView: View {
     @Binding var lastName: String
     @Binding var email: String
     @Binding var phoneNumber: String
-    @State var changeFont: Bool = false
+    @Binding var fontSize: CGFloat
     
     var body: some View {
         VStack{
@@ -39,30 +39,10 @@ struct DetailView: View {
             .padding()
             .foregroundColor(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
 
-            
-            Spacer().frame(maxHeight: 32)
-
-            Button("Change Font Size") {
-                self.changeFont.toggle()
-            }
-            .foregroundColor(Color(#colorLiteral(red: 0.3137254902, green: 0.8901960784, blue: 0.7607843137, alpha: 1)))
+            SizeView()
             
             Spacer()
         }
-        .modifier(CustomViewModifier())
-    }
-}
-
-
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(firstName: .constant(""), lastName: .constant(""), email: .constant(""), phoneNumber: .constant(""))
-    }
-}
-
-struct CustomViewModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.system(size: 20, weight: .light, design: .default))
+        .font(.system(size: CGFloat(fontSize), weight: .light, design: .default))
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct AccessibilityProject1App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(firstName: "Dave", lastName: "M", email: "dave.m@apple.com", phoneNumber: "8729002121")
+            ContentView(firstName: "Dave", lastName: "M", email: "dave.m@apple.com", phoneNumber: "8729002121", fontSize: .constant(10.0))
         }
     }
 }

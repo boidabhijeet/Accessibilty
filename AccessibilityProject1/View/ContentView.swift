@@ -13,7 +13,9 @@ struct ContentView: View {
     @State var lastName: String
     @State var email: String
     @State var phoneNumber: String
+    @Binding var fontSize: CGFloat
     
+        
     var body: some View {
         NavigationView {
             VStack {
@@ -41,25 +43,21 @@ struct ContentView: View {
                 Spacer().frame(maxHeight: 60)
 
                 NavigationLink(
-                    destination: DetailView(firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber),
+                    destination: DetailView(firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, fontSize: $fontSize),
                     label: {
                         Text("Detail View >>>")
                     })
                     .foregroundColor(Color(#colorLiteral(red: 0.3137254902, green: 0.8901960784, blue: 0.7607843137, alpha: 1)))
-                    .modifier(CustomViewModifier())
             
+                
+                SizeView()
                 
                 Spacer()
                 
             }
             .padding()
             .navigationBarHidden(true)
+            .font(.system(size: CGFloat(fontSize), weight: .light, design: .default))
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(firstName: "", lastName: "", email: "", phoneNumber: "")
     }
 }
