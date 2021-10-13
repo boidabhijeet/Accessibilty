@@ -7,30 +7,28 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     
-    @State var firstName: String
-    @State var lastName: String
-    @State var email: String
-    @State var phoneNumber: String
-    @Binding var fontSize: CGFloat
+    @State var detailObj: Details
+    @StateObject var sizeObj = SizeClass(fontSize: 14.0)
     
-        
     var body: some View {
         NavigationView {
             VStack {
-                Spacer().frame(maxHeight: 12)
+                
+                Spacer().frame(maxHeight: 16)
                 
                 Text("Accessibility SwiftUI")
                     .font(.system(size: 30, weight: .light, design: .default))
-
+                
                 Spacer().frame(maxHeight: 80)
                 
                 Group {
-                    TextField("First Name", text: $firstName)
-                    TextField("Last Name", text: $lastName)
-                    TextField("Email ID", text: $email)
-                    TextField("Contact", text: $phoneNumber)
+                    TextField("First Name", text: $detailObj.firstName)
+                    TextField("Last Name", text: $detailObj.lastName)
+                    TextField("Email ID", text: $detailObj.email)
+                    TextField("Contact", text: $detailObj.phoneNumber)
                 }
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
@@ -41,23 +39,23 @@ struct ContentView: View {
                 .shadow(color: Color(#colorLiteral(red: 0.3137254902, green: 0.8901960784, blue: 0.7607843137, alpha: 1)), radius: 1)
                 
                 Spacer().frame(maxHeight: 60)
-
+                
                 NavigationLink(
-                    destination: DetailView(firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, fontSize: $fontSize),
+                    destination: DetailView(details: $detailObj, sizeObj: sizeObj),
                     label: {
                         Text("Detail View >>>")
                     })
                     .foregroundColor(Color(#colorLiteral(red: 0.3137254902, green: 0.8901960784, blue: 0.7607843137, alpha: 1)))
-            
                 
-                SizeView()
+                SizeView(sizeObj: sizeObj)
                 
                 Spacer()
                 
             }
             .padding()
             .navigationBarHidden(true)
-            .font(.system(size: CGFloat(fontSize), weight: .light, design: .default))
+            .font(.system(size: CGFloat(sizeObj.fontSize), weight: .light, design: .default))
+            .accessibility(label: self)
         }
     }
 }
