@@ -55,7 +55,7 @@ struct ContentView: View {
             .padding()
             .navigationBarHidden(true)
             .font(.system(size: CGFloat(sizeObj.fontSize), weight: .light, design: .default))
-            .accessibility(label: self)
+//            .accessibility(value: )
         }
     }
 }
